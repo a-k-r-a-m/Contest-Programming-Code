@@ -1,25 +1,28 @@
 #include<bits/stdc++.h>
 using namespace std;
-int main() {
-    int n, a;
-    cin>>n;
-    vector<pair<int, int>> m;
-    pair<int, int> p;
-    for(int i=1; i<=n; i++){
-        cin>>a;
-        p.first = a;
-        p.second = i;
-        m.push_back(p);
+int main()
+{
+    /*abcdeffabcde
+abcdefabcdedabcdeffabc
+     */
+    string s1, s2;
+    int m, n, maxlen = 0, len, temp1 = 0, temp2 = 0, tj;
+    //cin>>s1>>s2;
+    s1 = "abcdeffabcde";
+    s2 = "abcdefabcdedabcdeffabc";
+    m = s1.size();
+    n = s2.size();
+    for( int i = 0; i < m; i++) {
+        len = 0;
+        for( int j = 0; j < n; j++) {
+            temp1 = i;
+            temp2 = j;
+            len = 0;
+            while (s1[temp1++]==s2[temp2++]) len++;
+            maxlen = max(maxlen, len);
+
+        }
     }
-    vector<pair<int, int>> ::iterator it;
-    sort(m.begin(), m.end());
-    it=m.begin();
-    int temp=it->second;
-    long long sum=0;
-    it++;
-    for(; it!=m.end(); it++){
-        sum+=min(fabs(temp - it->second), n - fabs(temp - it->second));
-        temp=it->second;
-    }
-    cout<<sum<<endl;
+    cout << maxlen << endl;
+    return 0;
 }
